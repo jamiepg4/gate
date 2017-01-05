@@ -60,6 +60,16 @@ class AuthConfig {
   }
 
   void configure(HttpSecurity http) throws Exception {
+
+
+    def env = System.getenv()
+    def loginUrl = env['LOGIN_URL']
+    if ( !loginUrl ) {
+      System.exit(1)
+    }
+
+    System.out.println("LOGIN_URL: " + loginUrl)
+
     http
       .authorizeRequests()
         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
@@ -74,7 +84,7 @@ class AuthConfig {
         .permitAll()
         .and()
       .formLogin()
-        .loginPage("https://spinnaker.armory.io:8084/login")
+        .loginPage(loginUrl)
         .and()
       .csrf()
         .disable()
