@@ -1,10 +1,12 @@
 #!/usr/bin/env groovy
 
-node() {
-    step("Build Image") {
-        sh('arm build')
+node {
+    checkout scm
+    
+    stage("Build Image") {
+        sh("arm build")
     }
-    step("Push Image") {
-        sh('arm push')
+    stage("Push Image") {
+        sh("arm push")
     }
 }
