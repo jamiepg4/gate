@@ -73,6 +73,7 @@ class AuthConfig {
     http
       .authorizeRequests()
         .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+        .antMatchers('/login').permitAll()
         .antMatchers('/auth/user').permitAll()
         .antMatchers(PermissionRevokingLogoutSuccessHandler.LOGGED_OUT_URL).permitAll()
         .antMatchers('/health').permitAll()
@@ -82,9 +83,6 @@ class AuthConfig {
         .logoutUrl("/auth/logout")
         .logoutSuccessHandler(permissionRevokingLogoutSuccessHandler)
         .permitAll()
-        .and()
-      .formLogin()
-        .loginPage(loginUrl)
         .and()
       .csrf()
         .disable()
