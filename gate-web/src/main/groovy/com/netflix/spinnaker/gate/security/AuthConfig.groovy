@@ -73,6 +73,9 @@ class AuthConfig {
         .logoutSuccessHandler(permissionRevokingLogoutSuccessHandler)
         .permitAll()
         .and()
+      .formLogin()
+        .loginPage("https://spinnaker.armory.io:8084/login")
+        .and()
       .csrf()
         .disable()
   }
